@@ -1,4 +1,4 @@
-# Lucas mentoring for Android Development vxcvxcv
+# Lucas mentoring for Android Development
 
 <img src="The_Guardian.png" width="100%" />
 
