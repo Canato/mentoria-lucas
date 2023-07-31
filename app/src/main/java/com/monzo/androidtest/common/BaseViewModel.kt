@@ -14,9 +14,9 @@ abstract class BaseViewModel<S : Any>(initialState: S) : ViewModel() {
     val state: LiveData<S> get() = _state
 
     @MainThread
-    protected fun setState(reducer: S.() -> S) {
+    protected fun setState(newState: S) {
         val currentState = _state.value!!
-        val newState = currentState.reducer()
+
         if (newState != currentState) {
             _state.value = newState
         }
