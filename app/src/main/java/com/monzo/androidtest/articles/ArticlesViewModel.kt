@@ -36,11 +36,10 @@ class ArticlesViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { articles ->
                 val newArticles = changeArticlesTitle(articles, step = 5)
-                state.value?.copy(articles = newArticles)?.let { newState ->
+                state.value?.copy(refreshing = false, articles = newArticles)?.let { newState ->
                     setState(newState)
                 }
             }
-        state.value?.copy(refreshing = false)?.let { newState -> setState(newState) }
     }
 }
 
