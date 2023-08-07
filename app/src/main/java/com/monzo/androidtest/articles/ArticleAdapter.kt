@@ -39,6 +39,7 @@ internal class ArticleAdapter(
     }
 
     fun showArticles(articles: List<Article>) {
+        this.articles.clear()
         this.articles.addAll(articles)
         notifyDataSetChanged()
     }
