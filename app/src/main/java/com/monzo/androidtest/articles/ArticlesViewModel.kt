@@ -9,29 +9,36 @@ import io.reactivex.schedulers.Schedulers
 class ArticlesViewModel(
     private val repository: ArticlesRepository
 ) : BaseViewModel<ArticlesState>(ArticlesState()) {
-    private fun changeArticlesTitle (articles: List<Article>, step: Int = 0, refresh: Boolean) {
+    private fun changeArticlesTitle (articles: List<Article>, step: Int = 0) : List<Article> {
         val newArticle = articles.mapIndexed { index, article ->
             if (index % step == 0) {
                 article.copy(title = "LUCAS")
             } else article
-
         }
-        state.value?.copy(refreshing = refresh, articles = newArticle)?.let { newState ->
-            setState(newState)
-        }
+        return newArticle
     }
     init {
         disposables += repository.latestFintechArticles()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { articles -> changeArticlesTitle(articles, step = 2, refresh = false) }
+            .subscribe { articles ->
+                val newArticles = changeArticlesTitle(articles, step = 2)
+                state.value?.copy(refreshing = false, articles = newArticles)?.let { newState ->
+                    setState(newState)
+                }
+            }
 
     }
     fun onRefresh() {
+        state.value?.copy(refreshing = true)?.let { newState -> setState(newState) }
         disposables += repository.latestFintechArticles()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { articles -> changeArticlesTitle(articles, step = 5, refresh = true)
+            .subscribe { articles ->
+                val newArticles = changeArticlesTitle(articles, step = 5)
+                state.value?.copy(articles = newArticles)?.let { newState ->
+                    setState(newState)
+                }
             }
         state.value?.copy(refreshing = false)?.let { newState -> setState(newState) }
     }
