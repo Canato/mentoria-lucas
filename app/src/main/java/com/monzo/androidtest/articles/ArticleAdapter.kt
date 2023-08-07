@@ -48,8 +48,10 @@ internal class ArticleAdapter(
         fun bind(article: Article) {
             val headlineView = itemView.findViewById<TextView>(R.id.article_headline_textview)
             val thumbnailView = itemView.findViewById<ImageView>(R.id.article_thumbnail_imageview)
+            val dateArticleView = itemView.findViewById<TextView>(R.id.article_date_textview)
 
             headlineView.text = article.title
+            dateArticleView.text = article.published.toString()
             Glide.with(context!!).load(article.thumbnail).into(thumbnailView)
         }
     }
