@@ -1,4 +1,4 @@
-package com.monzo.androidtest.articles
+package com.monzo.androidtest.articles.presentation
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.monzo.androidtest.R
-import com.monzo.androidtest.articles.model.Article
+
 import java.util.*
 
 
@@ -18,7 +18,7 @@ private var context: Context? = null
 internal class ArticleAdapter(
         ctx: Context
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private val articles: MutableList<Article> = ArrayList()
+    private val articles: MutableList<ArticleItem> = ArrayList()
 
     init {
         context = ctx
@@ -39,14 +39,14 @@ internal class ArticleAdapter(
         return articles.size
     }
 
-    fun showArticles(articles: List<Article>) {
+    fun showArticles(articles: List<ArticleItem>) {
         this.articles.clear()
         this.articles.addAll(articles)
         notifyDataSetChanged()
     }
 
     class ArticleViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(article: Article) {
+        fun bind(article: ArticleItem) {
             val headlineView = itemView.findViewById<TextView>(R.id.article_headline_textview)
             val thumbnailView = itemView.findViewById<ImageView>(R.id.article_thumbnail_imageview)
             val dateArticleView = itemView.findViewById<TextView>(R.id.article_date_textview)
