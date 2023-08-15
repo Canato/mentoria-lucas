@@ -5,6 +5,10 @@ import com.monzo.androidtest.common.BaseViewModel
 import com.monzo.androidtest.common.plusAssign
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.text.DateFormat
+import java.text.DateFormat.getDateInstance
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ArticlesViewModel(
     private val repository: ArticlesRepository
@@ -17,6 +21,20 @@ class ArticlesViewModel(
         }
         return newArticle
     }
+
+//    private fun formatDate (articles: List<Article>) : List<Article> {
+//        val newArticle = articles.map { article ->
+//            val formatter = getDateInstance(DateFormat.SHORT, Locale.UK).format(article.published)
+//            val formattedDate= SimpleDateFormat("dd/MM/yyyy").parse(formatter)
+//            article.copy(published = formattedDate)
+//
+//            val formattedDateStr = getDateInstance("dd/MM/yyyy").format(article.published)
+//            val formattedDate = SimpleDateFormat("dd/MM/yyyy").parse(formattedDateStr)
+//            article.copy(published = formattedDate)
+//        }
+//        return newArticle
+//    }
+
     init {
         disposables += repository.latestFintechArticles()
             .subscribeOn(Schedulers.io())
