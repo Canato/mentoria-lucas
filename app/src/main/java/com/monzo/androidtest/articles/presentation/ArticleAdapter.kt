@@ -13,21 +13,15 @@ import com.monzo.androidtest.R
 import java.util.*
 
 
-private var context: Context? = null
-
 internal class ArticleAdapter(
-        ctx: Context
+        private val context: Context
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val articles: MutableList<ArticleItem> = ArrayList()
-
-    init {
-        context = ctx
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(context)
         val view = layoutInflater.inflate(R.layout.list_item_article, parent, false)
-        return ArticleViewHolder(view)
+        return ArticleViewHolder(view, context)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -45,7 +39,7 @@ internal class ArticleAdapter(
         notifyDataSetChanged()
     }
 
-    class ArticleViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ArticleViewHolder(view: View, private val context: Context) : RecyclerView.ViewHolder(view) {
         fun bind(article: ArticleItem) {
             val headlineView = itemView.findViewById<TextView>(R.id.article_headline_textview)
             val thumbnailView = itemView.findViewById<ImageView>(R.id.article_thumbnail_imageview)
@@ -53,7 +47,7 @@ internal class ArticleAdapter(
 
             headlineView.text = article.title
             dateArticleView.text = article.published
-            Glide.with(context!!).load(article.thumbnail).into(thumbnailView)
+            Glide.with(context).load(article.thumbnail).into(thumbnailView)
         }
     }
 }
