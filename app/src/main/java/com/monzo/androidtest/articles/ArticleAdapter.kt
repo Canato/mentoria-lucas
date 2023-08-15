@@ -14,8 +14,13 @@ import java.util.*
 
 private var context: Context? = null
 
+interface OnItemClickListener {
+    fun onItemClick(article: Article)
+}
+
 internal class ArticleAdapter(
-        ctx: Context
+        ctx: Context,
+        private val itemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val articles: MutableList<Article> = ArrayList()
 
@@ -32,6 +37,9 @@ internal class ArticleAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val articleViewHolder = holder as ArticleViewHolder
         articleViewHolder.bind(articles[position])
+        holder.itemView.setOnClickListener {
+            itemClickListener.onItemClick(articles[position])
+        }
     }
 
     override fun getItemCount(): Int {
