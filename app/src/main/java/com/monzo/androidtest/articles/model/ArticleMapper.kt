@@ -1,6 +1,7 @@
 package com.monzo.androidtest.articles.model
 
 import com.monzo.androidtest.api.model.ApiArticleListResponse
+import java.text.SimpleDateFormat
 import java.util.*
 
 class ArticleMapper {
@@ -24,11 +25,18 @@ class ArticleMapper {
                 headline = fields.headline ?: ""
             }
 
+            var simpleDate : String
+            if (fields == null) {
+                simpleDate=""
+            } else {
+                simpleDate = SimpleDateFormat("dd/MM/yyyy").run { format(webPublicationDate) }
+            }
+
             articles.add(Article(id,
                     thumbnail,
                     sectionId,
                     sectionName,
-                    webPublicationDate,
+                    simpleDate,
                     headline,
                     apiUrl))
         }

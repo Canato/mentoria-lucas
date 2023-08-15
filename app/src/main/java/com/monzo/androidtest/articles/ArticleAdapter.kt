@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import com.monzo.androidtest.R
 import com.monzo.androidtest.articles.model.Article
 import java.util.*
-import java.text.SimpleDateFormat
 
 
 private var context: Context? = null
@@ -52,10 +51,8 @@ internal class ArticleAdapter(
             val thumbnailView = itemView.findViewById<ImageView>(R.id.article_thumbnail_imageview)
             val dateArticleView = itemView.findViewById<TextView>(R.id.article_date_textview)
 
-            val formattedDate = SimpleDateFormat("dd/MM/yyyy").run { format(article.published) }
-
             headlineView.text = article.title
-            dateArticleView.text = formattedDate
+            dateArticleView.text = article.published
             Glide.with(context!!).load(article.thumbnail).into(thumbnailView)
         }
     }
