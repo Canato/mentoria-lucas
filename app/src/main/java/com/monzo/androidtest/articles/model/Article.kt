@@ -7,7 +7,7 @@ data class Article(
         val thumbnail: String,
         val sectionId: String,
         val sectionName: String,
-        val published: Date,
+        val published: String,
         val title: String,
         val url: String
 )
