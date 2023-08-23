@@ -1,6 +1,7 @@
 package com.monzo.androidtest.articles.presentation
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,5 +37,12 @@ class ArticlesActivity : AppCompatActivity() {
             swipeRefreshLayout.isRefreshing = state.refreshing
             adapter.showArticles(state.articles)
         }
+
+        adapter.setOnItemClickListener(object: ArticleAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+                Toast.makeText(this@ArticlesActivity, "Clicked on item no. $position", Toast.LENGTH_LONG).show()
+            }
+
+        } )
     }
 }
