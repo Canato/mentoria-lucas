@@ -38,11 +38,15 @@ class ArticlesActivity : AppCompatActivity() {
             adapter.showArticles(state.articles)
         }
 
-        adapter.setOnItemClickListener(object: ArticleAdapter.onItemClickListener{
+        adapter.setOnItemClickListener(object : ArticleAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                Toast.makeText(this@ArticlesActivity, "Clicked on item no. $position", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this@ArticlesActivity,
+                    "Clicked on item no. $position",
+                    Toast.LENGTH_LONG
+                ).show()
             }
 
-        } )
+        })
     }
 }
