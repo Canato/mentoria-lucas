@@ -1,5 +1,6 @@
 package com.monzo.androidtest.articles.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.monzo.androidtest.HeadlinesApp
 import com.monzo.androidtest.R
+import com.monzo.androidtest.individual.presentation.IndividualArticleActivity
 
 
 class ArticlesActivity : AppCompatActivity(), ArticleAdapter.OnItemClickListener {
@@ -40,10 +42,9 @@ class ArticlesActivity : AppCompatActivity(), ArticleAdapter.OnItemClickListener
     }
 
     override fun onItemClick(position: Int) {
-        Toast.makeText(
-            this@ArticlesActivity,
-            "Clicked on item no. $position",
-            Toast.LENGTH_LONG
-        ).show()
+        Intent(this, IndividualArticleActivity::class.java).also {
+            startActivity(it)
+        }
+
     }
 }
