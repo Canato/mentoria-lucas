@@ -14,11 +14,11 @@ import java.util.*
 
 
 internal class ArticleAdapter(
-    private val context: Context
+    private val context: Context,
+    listener: OnItemClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val articles: MutableList<ArticleItem> = ArrayList()
-
-    private lateinit var clickListener: OnItemClickListener
+    private var clickListener: OnItemClickListener = listener
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
@@ -45,9 +45,6 @@ internal class ArticleAdapter(
         notifyDataSetChanged()
     }
 
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        clickListener = listener
-    }
 
     class ArticleViewHolder(
         view: View,

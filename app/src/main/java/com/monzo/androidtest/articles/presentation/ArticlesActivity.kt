@@ -11,7 +11,7 @@ import com.monzo.androidtest.HeadlinesApp
 import com.monzo.androidtest.R
 
 
-class ArticlesActivity : AppCompatActivity() {
+class ArticlesActivity : AppCompatActivity(), ArticleAdapter.OnItemClickListener {
     private lateinit var viewModel: ArticlesViewModel
     private lateinit var adapter: ArticleAdapter
 
@@ -27,7 +27,7 @@ class ArticlesActivity : AppCompatActivity() {
 
         viewModel = HeadlinesApp.from(applicationContext).inject(this)
 
-        adapter = ArticleAdapter(this)
+        adapter = ArticleAdapter(this, this)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
@@ -37,16 +37,13 @@ class ArticlesActivity : AppCompatActivity() {
             swipeRefreshLayout.isRefreshing = state.refreshing
             adapter.showArticles(state.articles)
         }
+    }
 
-        adapter.setOnItemClickListener(object : ArticleAdapter.OnItemClickListener {
-            override fun onItemClick(position: Int) {
-                Toast.makeText(
-                    this@ArticlesActivity,
-                    "Clicked on item no. $position",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-
-        })
+    override fun onItemClick(position: Int) {
+        Toast.makeText(
+            this@ArticlesActivity,
+            "Clicked on item no. $position",
+            Toast.LENGTH_LONG
+        ).show()
     }
 }
