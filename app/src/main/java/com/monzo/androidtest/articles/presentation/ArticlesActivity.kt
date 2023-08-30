@@ -42,7 +42,10 @@ class ArticlesActivity : AppCompatActivity(), ArticleAdapter.OnItemClickListener
     }
 
     override fun onItemClick(position: Int) {
+        val url = viewModel.state.value?.articles?.get(position)?.url
+
         Intent(this, IndividualArticleActivity::class.java).also {
+            it.putExtra("EXTRA_URL", url)
             startActivity(it)
         }
 
