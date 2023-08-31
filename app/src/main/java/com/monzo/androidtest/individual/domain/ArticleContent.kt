@@ -1,4 +1,7 @@
 package com.monzo.androidtest.individual.domain
 
-class ArticleContent {
-}
+data class ArticleContent(
+    val thumbnail: String,
+    val headline: String,
+    val body: String
+)
