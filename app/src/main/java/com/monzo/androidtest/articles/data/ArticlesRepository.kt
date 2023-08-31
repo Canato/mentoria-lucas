@@ -16,7 +16,7 @@ class ArticlesRepository(
                 }
     }
 
-    fun getArticle(articleUrl: String): Single<ApiArticle> {
-        return guardianService.getArticle(articleUrl, "main,body,headline,thumbnail")
-    }
+//    fun getArticle(articleUrl: String): Single<ApiArticle> {
+//        return guardianService.getArticle(articleUrl, "main,body,headline,thumbnail")
+//    }
 }
