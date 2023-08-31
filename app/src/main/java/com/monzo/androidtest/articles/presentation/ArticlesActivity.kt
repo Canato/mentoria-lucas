@@ -11,6 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.monzo.androidtest.HeadlinesApp
 import com.monzo.androidtest.R
 import com.monzo.androidtest.individual.presentation.IndividualArticleActivity
+import timber.log.Timber
 
 
 class ArticlesActivity : AppCompatActivity(), ArticleAdapter.OnItemClickListener {
@@ -20,6 +21,7 @@ class ArticlesActivity : AppCompatActivity(), ArticleAdapter.OnItemClickListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article_list)
+        Timber.plant(Timber.DebugTree())
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         val swipeRefreshLayout = findViewById<SwipeRefreshLayout>(R.id.articles_swiperefreshlayout)
