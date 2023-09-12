@@ -13,7 +13,8 @@ class HeadlinesApp : Application() {
         fun from(applicationContext: Context): ArticlesModule {
             return (applicationContext as HeadlinesApp).articlesModule
         }
-        fun from2(applicationContext: Context): IndividualModule{
+
+        fun from2(applicationContext: Context): IndividualModule {
             return (applicationContext as HeadlinesApp).individualModule
         }
     }

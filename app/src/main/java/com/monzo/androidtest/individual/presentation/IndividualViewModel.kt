@@ -18,7 +18,7 @@ class IndividualViewModel(
     init {
         disposables += repository.getArticle(url).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe ({ article ->
+            .subscribe({ article ->
                 val newArticle = IndividualArticle(
                     thumbnail = article.thumbnail,
                     headline = article.headline,

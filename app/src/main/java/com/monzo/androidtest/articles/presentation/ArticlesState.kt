@@ -1,7 +1,5 @@
 package com.monzo.androidtest.articles.presentation
 
-import com.monzo.androidtest.articles.domain.Article
-import java.util.Date
 
 data class ArticlesState(
     val refreshing: Boolean = true,
