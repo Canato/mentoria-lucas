@@ -13,6 +13,7 @@ class IndividualMapper {
         val body: String = article.fields.body!!
         return ArticleContent(thumbnail, headline, body)
     }
+
     fun map2(apiArticleResponse: ApiArticleResponse): ArticleContent =
         ArticleContent(
             thumbnail = apiArticleResponse.response.content.fields?.thumbnail!!,
@@ -22,7 +23,7 @@ class IndividualMapper {
         )
 
     fun map3(apiArticleResponse: ApiArticleResponse): ArticleContent =
-        apiArticleResponse.response.content.let { article  ->
+        apiArticleResponse.response.content.let { article ->
             ArticleContent(
                 thumbnail = article.fields?.thumbnail!!,
                 headline = article.fields.headline ?: article.webTitle,

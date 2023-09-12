@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat
 class ArticlesViewModel(
     private val repository: ArticlesRepository
 ) : BaseViewModel<ArticlesState>(ArticlesState()) {
-    private fun changeArticlesTitle (articles: List<ArticleItem>, step: Int = 0) : List<ArticleItem> {
+    private fun changeArticlesTitle(articles: List<ArticleItem>, step: Int = 0): List<ArticleItem> {
         val newArticle = articles.mapIndexed { index, article ->
             if (index % step == 0) {
                 article.copy(title = "LUCAS")
@@ -40,6 +40,7 @@ class ArticlesViewModel(
             }
 
     }
+
     fun onRefresh() {
         state.value?.copy(refreshing = true)?.let { newState -> setState(newState) }
         disposables += repository.latestFintechArticles()
