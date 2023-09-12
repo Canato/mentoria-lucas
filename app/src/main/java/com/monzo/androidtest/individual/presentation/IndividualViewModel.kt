@@ -12,7 +12,7 @@ import timber.log.Timber
 class IndividualViewModel(
     private val repository: IndvArticlesRepository,
     private val url: String
-) : BaseViewModel<IndividualState>(IndividualState()) {
+) : BaseViewModel<IndividualState>(IndividualState(null)) {
 
 
     init {

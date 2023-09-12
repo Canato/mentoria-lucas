@@ -3,7 +3,7 @@ package com.monzo.androidtest.individual.presentation
 
 
 data class IndividualState(
-    val article: IndividualArticle? = null
+    val article: IndividualArticle?
 )
 
 data class IndividualArticle(
