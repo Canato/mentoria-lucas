@@ -42,8 +42,8 @@ class IndividualArticleActivity : AppCompatActivity() {
 
         headlineTextView.text = article?.headline
         bodyTextView.text = article?.text
-        if (article != null){
-        Glide.with(this).load(article.thumbnail).into(thumbnailImageView)
+        article?.let{
+            Glide.with(this).load(it.thumbnail).into(thumbnailImageView)
         }
     }
 }
