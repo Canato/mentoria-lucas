@@ -8,8 +8,8 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.monzo.androidtest.HeadlinesApp
 import com.monzo.androidtest.R
-import com.monzo.androidtest.api.GuardianService
-import com.monzo.androidtest.individual.data.IndvArticlesRepository
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
 
 class IndividualArticleActivity : AppCompatActivity() {
     private lateinit var viewModel: IndividualViewModel
@@ -41,9 +41,12 @@ class IndividualArticleActivity : AppCompatActivity() {
         val article = state.article
 
         headlineTextView.text = article?.headline
-        bodyTextView.text = article?.text
         article?.let {
             Glide.with(this).load(it.thumbnail).into(thumbnailImageView)
         }
+        val jsonBody = article?.body ?: ""
+        val document: Document = Jsoup.parse(jsonBody)
+        val formattedText = document.text()
+        bodyTextView.text = formattedText
     }
 }

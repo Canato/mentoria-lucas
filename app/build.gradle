@@ -28,6 +28,7 @@ dependencies {
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+    implementation 'org.jsoup:jsoup:1.14.3'
 
     // RxJava
     implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
