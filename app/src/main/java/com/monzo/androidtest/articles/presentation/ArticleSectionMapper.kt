@@ -15,9 +15,9 @@ object ArticleSectionMapper {
 
         val currentWeek = calendar.get(Calendar.WEEK_OF_YEAR)
 
-        val articlesThisWeek = mutableListOf<Article>()
-        val articlesLastWeek = mutableListOf<Article>()
-        val articlesOlder = mutableListOf<Article>()
+        val thisWeek = mutableListOf<Article>()
+        val lastWeek = mutableListOf<Article>()
+        val older = mutableListOf<Article>()
 
         for (article in articles) {
             calendar.time = article.published
@@ -25,23 +25,26 @@ object ArticleSectionMapper {
             val weekDiff = currentWeek - articleWeek
 
             if (weekDiff == 0) {
-                articlesThisWeek.add(article)
+                thisWeek.add(article)
             } else if (weekDiff == 1) {
-                articlesLastWeek.add(article)
+                lastWeek.add(article)
             } else {
-                articlesOlder.add(article)
+                older.add(article)
             }
         }
-        val articleItemThisWeek = mapToArticleItem(articlesThisWeek)
-        val articleItemLastWeek = mapToArticleItem(articlesLastWeek)
-        val articleItemOlder = mapToArticleItem(articlesOlder)
+        thisWeek.sortByDescending { it.published }
+        lastWeek.sortByDescending { it.published }
+        older.sortByDescending { it.published }
+        val articleThisWeek = mapToArticleItem(thisWeek)
+        val articleLastWeek = mapToArticleItem(lastWeek)
+        val articleOlder = mapToArticleItem(older)
 
 
 
         return listOf(
-            ArticleSection("This Week", articleItemThisWeek),
-            ArticleSection("Last Week", articleItemLastWeek),
-            ArticleSection("Older Articles", articleItemOlder)
+            ArticleSection("This Week", articleThisWeek),
+            ArticleSection("Last Week", articleLastWeek),
+            ArticleSection("Older Articles", articleOlder)
         )
 
 
