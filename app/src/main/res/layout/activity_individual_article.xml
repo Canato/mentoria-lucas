@@ -16,6 +16,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/second_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                android:elevation="4dp"
+                app:navigationIcon="@drawable/baseline_arrow_back_24"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
             <ImageView
                 android:id="@+id/thumbnail_imageView"
                 android:layout_width="match_parent"

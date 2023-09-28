@@ -1,10 +1,10 @@
 package com.monzo.androidtest.individual.presentation
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
 import com.monzo.androidtest.HeadlinesApp
 import com.monzo.androidtest.R
@@ -26,6 +26,10 @@ class IndividualArticleActivity : AppCompatActivity() {
         thumbnailImageView = findViewById(R.id.thumbnail_imageView)
         headlineTextView = findViewById(R.id.headline_textView)
         bodyTextView = findViewById(R.id.body_textView)
+
+        val toolbar = findViewById<Toolbar>(R.id.second_toolbar)
+        setSupportActionBar(toolbar)
+
 
         viewModel = HeadlinesApp.from2(applicationContext).inject(applicationContext, url!!)
 
