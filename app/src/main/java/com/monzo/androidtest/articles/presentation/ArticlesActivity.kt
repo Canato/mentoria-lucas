@@ -16,12 +16,11 @@ import timber.log.Timber
 
 class ArticlesActivity : AppCompatActivity(), ArticleAdapter.OnItemClickListener {
     private lateinit var viewModel: ArticlesViewModel
-    private lateinit var adapter: ArticleAdapter
+    private lateinit var sectionAdapter: SectionAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article_list)
-        Timber.plant(Timber.DebugTree())
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         val swipeRefreshLayout = findViewById<SwipeRefreshLayout>(R.id.articles_swiperefreshlayout)
@@ -31,20 +30,23 @@ class ArticlesActivity : AppCompatActivity(), ArticleAdapter.OnItemClickListener
 
         viewModel = HeadlinesApp.from(applicationContext).inject(this)
 
-        adapter = ArticleAdapter(this, this)
+        sectionAdapter = SectionAdapter(this, this)
+
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = sectionAdapter
 
         swipeRefreshLayout.setOnRefreshListener { viewModel.onRefresh() }
 
         viewModel.state.observe(this) { state ->
             swipeRefreshLayout.isRefreshing = state.refreshing
-            adapter.showArticles(state.articles)
+            sectionAdapter.showSections(state.articleSection)
         }
     }
 
-    override fun onItemClick(position: Int) {
-        val url = viewModel.state.value?.articles?.get(position)?.url
+    override fun onItemClick(articlePosition: Int, sectionPosition: Int) {
+        val url = viewModel.state.value?.articleSection?.get(sectionPosition)?.articles?.get(
+            articlePosition
+        )?.url
 
         Intent(this, IndividualArticleActivity::class.java).also {
             it.putExtra("EXTRA_URL", url)

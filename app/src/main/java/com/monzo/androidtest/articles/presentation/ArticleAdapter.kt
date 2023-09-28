@@ -15,19 +15,19 @@ import java.util.*
 
 internal class ArticleAdapter(
     private val context: Context,
-    listener: OnItemClickListener
+    private val listener: OnItemClickListener,
+    private val articles: List<ArticleItem>,
+    private val sectionPosition: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private val articles: MutableList<ArticleItem> = ArrayList()
-    private var clickListener: OnItemClickListener = listener
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int)
+        fun onItemClick(articlePosition: Int, sectionPosition: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(context)
         val view = layoutInflater.inflate(R.layout.list_item_article, parent, false)
-        return ArticleViewHolder(view, context, clickListener)
+        return ArticleViewHolder(view, context, listener, sectionPosition)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -39,17 +39,11 @@ internal class ArticleAdapter(
         return articles.size
     }
 
-    fun showArticles(articles: List<ArticleItem>) {
-        this.articles.clear()
-        this.articles.addAll(articles)
-        notifyDataSetChanged()
-    }
-
-
     class ArticleViewHolder(
         view: View,
         private val context: Context,
-        listener: OnItemClickListener
+        listener: OnItemClickListener,
+        private val sectionPosition: Int
     ) : RecyclerView.ViewHolder(view) {
         fun bind(article: ArticleItem) {
             val headlineView = itemView.findViewById<TextView>(R.id.article_headline_textview)
@@ -63,7 +57,7 @@ internal class ArticleAdapter(
 
         init {
             itemView.setOnClickListener {
-                listener.onItemClick(bindingAdapterPosition)
+                listener.onItemClick(bindingAdapterPosition, sectionPosition)
             }
         }
     }
