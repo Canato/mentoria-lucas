@@ -8,5 +8,5 @@ data class IndividualState(
 data class IndividualArticle(
     val thumbnail: String,
     val headline: String,
-    val text: String
+    val body: String
 )
