@@ -43,15 +43,11 @@ class ArticlesActivity : AppCompatActivity(), ArticleAdapter.OnItemClickListener
         }
     }
 
-    override fun onItemClick(articlePosition: Int, sectionPosition: Int) {
-        val url = viewModel.state.value?.articleSection?.get(sectionPosition)?.articles?.get(
-            articlePosition
-        )?.url
+    override fun onItemClick(articleUrl: String) {
 
         Intent(this, IndividualArticleActivity::class.java).also {
-            it.putExtra("EXTRA_URL", url)
+            it.putExtra("EXTRA_URL", articleUrl)
             startActivity(it)
         }
-
     }
 }

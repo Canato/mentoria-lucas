@@ -52,8 +52,7 @@ internal class SectionAdapter(
 
             val adapter = ArticleAdapter(
                 context = context,
-                listener = listener,
-                sectionPosition = bindingAdapterPosition
+                listener = listener
             )
 
             recyclerView.layoutManager = LinearLayoutManager(context)
