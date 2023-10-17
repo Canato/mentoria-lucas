@@ -11,7 +11,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.monzo.androidtest.HeadlinesApp
 import com.monzo.androidtest.R
 import com.monzo.androidtest.individual.presentation.IndividualArticleActivity
-import timber.log.Timber
 
 
 class ArticlesActivity : AppCompatActivity(), ArticleAdapter.OnItemClickListener {

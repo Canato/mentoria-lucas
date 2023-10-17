@@ -1,6 +1,7 @@
 package com.monzo.androidtest.articles.presentation
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +27,14 @@ internal class ArticleAdapter(
         val layoutInflater = LayoutInflater.from(context)
         val view = layoutInflater.inflate(R.layout.list_item_article, parent, false)
 
-        return ArticleViewHolder(view, context) { listener.onItemClick(articles[it].url) }
+        return ArticleViewHolder(
+            view = view,
+            context = context,
+            onClick = { index ->
+                listener.onItemClick(articles[index].url)
+            }
+
+        )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -47,7 +55,7 @@ internal class ArticleAdapter(
     class ArticleViewHolder(
         view: View,
         private val context: Context,
-        getArticlePosition: (Int) -> Unit
+        private val onClick: (Int) -> Unit
     ) : RecyclerView.ViewHolder(view) {
         fun bind(article: ArticleItem) {
             val headlineView = itemView.findViewById<TextView>(R.id.article_headline_textview)
@@ -57,11 +65,8 @@ internal class ArticleAdapter(
             headlineView.text = article.title
             dateArticleView.text = article.published
             Glide.with(context).load(article.thumbnail).into(thumbnailView)
-        }
-
-        init {
             itemView.setOnClickListener {
-                getArticlePosition(bindingAdapterPosition)
+                onClick(bindingAdapterPosition)
             }
         }
     }
