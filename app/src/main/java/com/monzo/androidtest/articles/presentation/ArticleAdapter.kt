@@ -17,19 +17,18 @@ import kotlin.collections.ArrayList
 internal class ArticleAdapter(
     private val context: Context,
     private val listener: OnItemClickListener,
-    private val sectionPosition: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val articles: MutableList<ArticleItem> = ArrayList()
 
     interface OnItemClickListener {
-        fun onItemClick(articlePosition: Int, sectionPosition: Int)
+        fun onItemClick(articleUrl: String)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(context)
         val view = layoutInflater.inflate(R.layout.list_item_article, parent, false)
-        return ArticleViewHolder(view, context, listener, sectionPosition)
+        return ArticleViewHolder(view, context, listener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -47,11 +46,10 @@ internal class ArticleAdapter(
         notifyDataSetChanged()
     }
 
-    class ArticleViewHolder(
+    inner class ArticleViewHolder(
         view: View,
         private val context: Context,
-        listener: OnItemClickListener,
-        private val sectionPosition: Int
+        listener: OnItemClickListener
     ) : RecyclerView.ViewHolder(view) {
         fun bind(article: ArticleItem) {
             val headlineView = itemView.findViewById<TextView>(R.id.article_headline_textview)
@@ -65,7 +63,7 @@ internal class ArticleAdapter(
 
         init {
             itemView.setOnClickListener {
-                listener.onItemClick(bindingAdapterPosition, sectionPosition)
+                listener.onItemClick(articles[bindingAdapterPosition].url)
             }
         }
     }
