@@ -11,14 +11,16 @@ import com.bumptech.glide.Glide
 import com.monzo.androidtest.R
 
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 internal class ArticleAdapter(
     private val context: Context,
     private val listener: OnItemClickListener,
-    private val articles: List<ArticleItem>,
     private val sectionPosition: Int
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private val articles: MutableList<ArticleItem> = ArrayList()
 
     interface OnItemClickListener {
         fun onItemClick(articlePosition: Int, sectionPosition: Int)
@@ -37,6 +39,12 @@ internal class ArticleAdapter(
 
     override fun getItemCount(): Int {
         return articles.size
+    }
+
+    fun showArticles(articles: List<ArticleItem>) {
+        this.articles.clear()
+        this.articles.addAll(articles)
+        notifyDataSetChanged()
     }
 
     class ArticleViewHolder(
