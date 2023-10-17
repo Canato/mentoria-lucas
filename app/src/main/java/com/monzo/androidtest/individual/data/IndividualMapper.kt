@@ -14,21 +14,21 @@ class IndividualMapper {
         return ArticleContent(thumbnail, headline, body)
     }
 
-    fun map2(apiArticleResponse: ApiArticleResponse): ArticleContent =
-        ArticleContent(
-            thumbnail = apiArticleResponse.response.content.fields?.thumbnail!!,
-            headline = apiArticleResponse.response.content.fields.headline
-                ?: apiArticleResponse.response.content.webTitle,
-            body = apiArticleResponse.response.content.fields.body!!
-        )
-
-    fun map3(apiArticleResponse: ApiArticleResponse): ArticleContent =
-        apiArticleResponse.response.content.let { article ->
-            ArticleContent(
-                thumbnail = article.fields?.thumbnail!!,
-                headline = article.fields.headline ?: article.webTitle,
-                body = article.fields.body!!
-            )
-
-        }
+//    fun map2(apiArticleResponse: ApiArticleResponse): ArticleContent =
+//        ArticleContent(
+//            thumbnail = apiArticleResponse.response.content.fields?.thumbnail!!,
+//            headline = apiArticleResponse.response.content.fields.headline
+//                ?: apiArticleResponse.response.content.webTitle,
+//            body = apiArticleResponse.response.content.fields.body!!
+//        )
+//
+//    fun map3(apiArticleResponse: ApiArticleResponse): ArticleContent =
+//        apiArticleResponse.response.content.let { article ->
+//            ArticleContent(
+//                thumbnail = article.fields?.thumbnail!!,
+//                headline = article.fields.headline ?: article.webTitle,
+//                body = article.fields.body!!
+//            )
+//
+//        }
 }
