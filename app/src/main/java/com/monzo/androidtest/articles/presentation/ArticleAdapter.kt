@@ -17,7 +17,7 @@ internal class ArticleAdapter(
     private val listener: OnItemClickListener,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val articles: MutableList<ArticleItem> = ArrayList()
+    private var articles: List<ArticleItem> = ArrayList()
 
     interface OnItemClickListener {
         fun onItemClick(articleUrl: String)
@@ -47,8 +47,7 @@ internal class ArticleAdapter(
     }
 
     fun showArticles(articles: List<ArticleItem>) {
-        this.articles.clear()
-        this.articles.addAll(articles)
+        this.articles = articles
         notifyDataSetChanged()
     }
 
