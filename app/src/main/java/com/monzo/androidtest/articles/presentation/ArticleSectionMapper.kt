@@ -1,17 +1,16 @@
 package com.monzo.androidtest.articles.presentation
 
 import com.monzo.androidtest.articles.domain.Article
+import com.monzo.androidtest.common.DateProvider
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
 
-object ArticleSectionMapper {
+class ArticleSectionMapper(
+    private val dateProvider: DateProvider
+) {
     fun mapToSection(articles: List<Article>): List<ArticleSection> {
 
-        val currentDate = Date()
-        val calendar = Calendar.getInstance()
-
-        calendar.time = currentDate
+        val calendar = dateProvider.getCurrentDate()
 
         val currentWeek = calendar.get(Calendar.WEEK_OF_YEAR)
 
