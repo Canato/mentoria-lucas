@@ -1,4 +1,9 @@
 package com.monzo.androidtest.common
 
-class DateProviderImp {
+import java.util.Calendar
+
+class DateProviderImp : DateProvider {
+    override fun getCurrentDate(): Calendar {
+        return Calendar.getInstance()
+    }
 }
