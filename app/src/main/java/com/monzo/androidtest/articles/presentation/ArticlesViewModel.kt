@@ -9,14 +9,15 @@ import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
 
 class ArticlesViewModel(
-    private val repository: ArticlesRepository
+    private val repository: ArticlesRepository,
+    private val mapper: ArticleSectionMapper
 ) : BaseViewModel<ArticlesState>(ArticlesState()) {
     init {
         disposables += repository.latestFintechArticles().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { articles ->
 
-                val sections = ArticleSectionMapper.mapToSection(articles)
+                val sections = mapper.mapToSection(articles)
 
                 state.value?.copy(refreshing = false, articleSection = sections)?.let { newState ->
                     setState(newState)
@@ -32,7 +33,7 @@ class ArticlesViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { articles ->
 
-                val sections = ArticleSectionMapper.mapToSection(articles)
+                val sections = mapper.mapToSection(articles)
 
                 state.value?.copy(refreshing = false, articleSection = sections)?.let { newState ->
                     setState(newState)
