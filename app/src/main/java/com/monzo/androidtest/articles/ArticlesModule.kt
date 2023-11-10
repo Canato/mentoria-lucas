@@ -6,6 +6,8 @@ import com.monzo.androidtest.articles.data.ArticlesRepository
 import com.monzo.androidtest.articles.presentation.ArticlesViewModel
 import com.monzo.androidtest.articles.data.ArticleMapper
 import com.monzo.androidtest.common.injection.NetworkModule
+import com.monzo.androidtest.articles.presentation.ArticleSectionMapper
+import com.monzo.androidtest.common.DateProviderImp
 
 class ArticlesModule {
     fun inject(context: Context): ArticlesViewModel {
@@ -15,7 +17,8 @@ class ArticlesModule {
             repository = ArticlesRepository(
                 guardianService = guardianService,
                 articleMapper = ArticleMapper()
-            )
+            ),
+            mapper = ArticleSectionMapper(dateProvider = DateProviderImp())
         )
     }
 }
