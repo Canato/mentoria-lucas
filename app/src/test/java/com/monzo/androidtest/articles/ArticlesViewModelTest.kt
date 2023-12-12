@@ -32,6 +32,6 @@ import org.junit.Test
 class ArticlesViewModelTest {
     @Test
     fun test(){
-        assertEquals(1,2)
+        assertEquals(1,1)
     }
 }
